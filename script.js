@@ -28,7 +28,7 @@ async function onDraw() {
   document.getElementById("oneCardPictures").innerHTML = picHtml;
   document.getElementById("playerOneTotal").innerHTML = "<p>" + playerOneCardsSum + "</p>";
   if (playerOneCardsSum > 21) {
-    document.getElementById("results").innerHTML = "<h1>You lose</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!House Wins!!!</h1>";
     document.getElementById("playerOneCardsHead").innerHTML = "<h2>Your Final Cards</h2>";
     document.getElementById("buttons").innerHTML = "<form><button id='startGame' class='pure-button pure-button-primary'>Start New Game</button></form>";
   }
@@ -43,9 +43,11 @@ async function onHold(event, deckID) {
   var house = await listPile(deckID, "house");
   var houseCards = house.house.cards;
   let houseCardsSum = findSum(houseCards);
+  document.getElementById("playerOneCardsHead").innerHTML = "<h2>Your Final Cards</h2>";
+  document.getElementById("houseCardsHead").innerHTML = "<h2>Dealer's Final Cards</h2>";
   if (houseCardsSum > playerOneCardsSum) {
     //house wins
-    document.getElementById("results").innerHTML = "<h1>The house wins</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!House Wins!!!</h1>";
     document.getElementById("buttons").innerHTML = "<form><button id='startGame' class='pure-button pure-button-primary'>Start New Game</button></form>";
     var picHtml = "";
     for (let i = 0; i < houseCards.length; ++i) {
@@ -61,7 +63,7 @@ async function onHold(event, deckID) {
   }
   if (houseCardsSum > 21) {
     //house loses
-    document.getElementById("results").innerHTML = "<h1>Player One wins</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!You Win!!!</h1>";
     document.getElementById("buttons").innerHTML = "<form><button id='startGame' class='pure-button pure-button-primary'>Start New Game</button></form>";
     var picHtml = "";
     for (let i = 0; i < houseCards.length; ++i) {
@@ -71,7 +73,7 @@ async function onHold(event, deckID) {
   }
   else if (houseCardsSum > playerOneCardsSum) {
     //house wins
-    document.getElementById("results").innerHTML = "<h1>The house wins</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!House Wins!!!</h1>";
     document.getElementById("buttons").innerHTML = "<form><button id='startGame' class='pure-button pure-button-primary'>Start New Game</button></form>";
     var picHtml = "";
     for (let i = 0; i < houseCards.length; ++i) {
@@ -81,7 +83,7 @@ async function onHold(event, deckID) {
   }
   else if (houseCardsSum == playerOneCardsSum) {
     //draw
-    document.getElementById("results").innerHTML = "<h1>It is a draw</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!Draw!!!</h1>";
     document.getElementById("buttons").innerHTML = "<form><button id='startGame' class='pure-button pure-button-primary'>Start New Game</button></form>";
     var picHtml = "";
     for (let i = 0; i < houseCards.length; ++i) {
@@ -91,7 +93,7 @@ async function onHold(event, deckID) {
   }
   else {
     //player wins
-    document.getElementById("results").innerHTML = "<h1>Player One wins</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!You win!!!</h1>";
     document.getElementById("buttons").innerHTML = "<form><button id='startGame' class='pure-button pure-button-primary'>Start New Game</button></form>";
     var picHtml = "";
     for (let i = 0; i < houseCards.length; ++i) {
@@ -120,31 +122,37 @@ async function newGame(deckID) {
   if (houseCardsSum == 21) {
     if (playerOneCardsSum == 21) {
       //this is a draw
-      document.getElementById("results").innerHTML = "<h1>This is a draw</h1>";
+      document.getElementById("results").innerHTML = "<h1>!!!Draw!!!</h1>";
       var picHtml = "";
       for (let i = 0; i < houseCards.length; ++i) {
           picHtml += "<img src='" + houseCards[i].image + "'/>";
       }
       document.getElementById("housePictures").innerHTML = picHtml;
+      document.getElementById("playerOneCardsHead").innerHTML = "<h2>Your Final Cards</h2>";
+      document.getElementById("houseCardsHead").innerHTML = "<h2>Dealer's Final Cards</h2>";
     }
     else {
       //the house wins with a natural
-      document.getElementById("results").innerHTML = "<h1>The house wins with a natural and you owe the 1.5 times your original bet</h1>";
+      document.getElementById("results").innerHTML = "<h1>!!!Natural House Wins!!!</h1>";
       var picHtml = "";
       for (let i = 0; i < houseCards.length; ++i) {
         picHtml += "<img src='" + houseCards[i].image + "'/>";
       }
       document.getElementById("housePictures").innerHTML = picHtml;
+      document.getElementById("playerOneCardsHead").innerHTML = "<h2>Your Final Cards</h2>";
+      document.getElementById("houseCardsHead").innerHTML = "<h2>Dealer's Final Cards</h2>";
     }
   }
   else if (playerOneCardsSum == 21) {
     //player wins with natural
-    document.getElementById("results").innerHTML = "<h1>You win with a natural</h1>";
+    document.getElementById("results").innerHTML = "<h1>!!!You Win With Natural!!!</h1>";
     var picHtml = "";
     for (let i = 0; i < houseCards.length; ++i) {
       picHtml += "<img src='" + houseCards[i].image + "'/>";
     }
     document.getElementById("housePictures").innerHTML = picHtml;
+    document.getElementById("playerOneCardsHead").innerHTML = "<h2>Your Final Cards</h2>";
+    document.getElementById("houseCardsHead").innerHTML = "<h2>Dealer's Final Cards</h2>";
   }
   else {
     //there are no naturals
