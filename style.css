@@ -1,0 +1,29 @@
+body {
+  background-color:#35654D;
+  margin-bottom:75px;
+  margin-left:0px;
+  margin-right:0px;
+}
+.header {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background-image:url("https://i.insider.com/529f4c82ecad043a6958f3fc?width=694&format=jpeg");
+  color:white;
+}
+.footer {
+  display:flex;
+  justify-content:center;
+  position:fixed;
+  bottom:0px;
+  width:100%;
+  padding:20px;
+  background-color:black;
+}
+#buttons {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:50px;
+}
